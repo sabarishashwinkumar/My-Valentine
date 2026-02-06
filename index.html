@@ -3,114 +3,102 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Valentine 💖</title>
+<title>💖 Will You Be My Valentine? 💖</title>
 <style>
 body {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
-    background: #121212;
-    color: #f2f2f2;
+    background: #1a1a1a;
+    color: #fff;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
     min-height: 100vh;
     text-align: center;
-    flex-direction: column;
 }
-h2 { color: #ff9fc4; }
-.letter {
-    background: #1e1e1e;
-    padding: 25px;
-    border-radius: 18px;
-    max-width: 700px;
-    max-height: 70vh;
-    overflow-y: auto;
-    margin: 20px 0;
-    display: none;
-    text-align: left;
-    line-height: 1.6;
-    animation: fadeIn 0.8s ease;
-}
+h1, p { margin: 20px; }
 button {
-    padding: 12px 24px;
-    font-size: 1.1em;
+    padding: 12px 25px;
+    font-size: 1.2em;
     border: none;
     border-radius: 12px;
     cursor: pointer;
-    background: #ff4f8b;
-    color: white;
-    margin-top: 15px;
+    margin: 15px;
+    transition: all 0.2s ease;
 }
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+#yesBtn { background: #ff4f8b; color: #fff; }
+#noBtn { background: #aaa; color: #000; position: relative; }
+#takeBtn { background: #ff9fc4; color: #fff; display: none; }
+
+#gifContainer { margin: 20px; }
+.hidden { display: none; }
 </style>
 </head>
 <body>
 
-<h1>💌 My Valentine Letters 💌</h1>
-<p>Click the button to read each day’s letter</p>
-<button id="nextBtn">Show Next Letter 💖</button>
-
-<!-- Letters -->
-<div class="letter" id="letter1">
-  <h2>🌹 Rose Day</h2>
-  <p>I still remember the first time I got flowers for you. I searched through two shops just to find those pretty roses, even though you deserved so much more for making my life as beautiful as it is now. I’m sorry I couldn’t find any prettier flowers other day.<br><br> But when we meet, I promise I’ll always bring you flowers, for my pathhuu podavai.<br><br> Still… you’re prettier than every flower I’ve ever come across anyway.<br><br> Yours Lovely,<br>Gardener</p>
+<h1>Awwiee your so beutifulllll....</h1>
+<div id="gifContainer">
+    <img src="https://media.giphy.com/media/l0HlBO7eyXzSZkJri/giphy.gif" alt="Cute GIF" width="250">
 </div>
 
-<div class="letter" id="letter2">
-  <h2>💍 Propose Day</h2>
-  <p>I always had a soft spot for you, even when we were just best friends. You took care of me, supported me, and stood by me with your smile and quiet affection during my toughest times—without even knowing how much I needed it. You were always there for me.<br><br> I was such a coward for not proposing to you first. I was scared that if I did, our friendship might be affected. But even though I never said it out loud, I secretly manifested you as my partner. I loved you in silence. I admired you quietly.<br><br> When I met you for the first time, I fell even more. I found myself watching you, the way you applied your lipstick, the way you took small sips of your coffee. I even imagined you beside me in bed, cuddling, when I went back home and slept. But my fear of losing my best friend kept scolding my love for you, again and again.<br><br> And then you broke my agony with your proposal.<br><br> Forever yours,<br>Silent Lover<br><br> Thank you.<br> I will always love you, kadhathal deva</p>
+<button id="okayBtn">Okay?</button>
+
+<div id="valentinePrompt" class="hidden">
+    <h2>Will you be my Valentine?</h2>
+    <button id="yesBtn">Yes</button>
+    <button id="noBtn">No</button>
 </div>
 
-<div class="letter" id="letter3">
-  <h2>🍫 Chocolate Day</h2>
-  <p>When we shared our first bedtime together, I kissed you with chocolate, slowly and wholeheartedly covered you lips with chocolates. The lips I once admired getting lipsticked, sipping coffee are now got covered in chocolate by me that day. And at the end, you even asked for more chocolate kisses.<br><br> Your soft moans and your curves gave me enough sweetness for a lifetime in that moment. I didn’t need anything more.<br><br> You are my white chocolate the one I crave every single day.<br><br> Forever yours,<br>your dark chocolate</p>
-</div>
-
-<div class="letter" id="letter4">
-  <h2>🧸 Teddy Day</h2>
-  <p>Whenever i talk about gifts, you always say, “I want a big teddy bear (me).” I even got you a stuffed toy sorry I still haven’t been able to give it to you yet.<br><br> Sometimes I imagine the two little teddy bears we’ll get when we’re married. I want them to be cute and fluffy just like you. When you sent me that AI-generated image, my heart went wild for a moment. I had to remind myself to breathe and calm down preventing impregnating (You see i got some self control), I can’t wait for the day when I get to see our little mini versions.<br><br> Love you, pathhu ma<br>Always yours,<br>your big karadii</p>
-</div>
-
-<div class="letter" id="letter5">
-  <h2>🤞 Promise Day</h2>
-  <p>I’ve always been afraid of making promises in my life. But when I promised you to always be with you, loving you, deva ,I didn’t hesitate even for a second.<br><br> I keep that promise every day, trying to reassure you in every way I can. I give my effort, my time, and my heart to this love. I always try to keep you happy and healthy. I always respect you as my deva, even when I rage bait and act silly sometimes.<br><br> I will always be there for you, pathhu ma.<br>Love you foreverrr, my lovelyyy devaa<br><br> Always yours,<br>your kadhalan</p>
-</div>
-
-<div class="letter" id="letter6">
-  <h2>🤗 Hug Day</h2>
-  <p>When we hugged by the sea, even the waves watching us must have thought we were meant to stay forever. I fall asleep imagining your arms around me, cursing this distance that we both hate so much.<br><br> Even when we were hugging, you still searched for me even though there was no distance between us at all. That’s when I knew you loved me even more than I love you.<br><br> When we layed together without any cloths, Our skin found comfort in each other, moving gently, learning, cherishing it. It felt like our hearts were merging. Every touch, every gentle cuddles, made us forget everything else. In that closeness, it was just you and me.<br><br> I held you close, breathing you in, enjoying every warm alcoholic breath you shared against my face. Your scent stayed with me, and I carried it all the way back home.<br><br> I’m still craving your hug until the day we meet again.<br><br> Forever yours,<br>your Huggyy bearrr</p>
-</div>
-
-<div class="letter" id="letter7">
-  <h2>💋 Kiss Day</h2>
-  <p>I still remember the kisses we shared when we first met as lovers. We craved each other, forgetting the world around us and the eyes that watched. I cherished every one of those stolen kisses in the theatre, in the elevator, even the playful moment when you bit my tongue and laughed stays with me forever.<br><br> Those lips are the reason I found myself again. The lips I once admired from afar were given to me as a gift, and I will keep that gift forever.<br><br> I assure you when we are together, you lips will always stays wet.<br><br> Always yours,<br>your lovely chocolate lips</p>
-</div>
-
-<div class="letter" id="letter8">
-  <h2>❤️ Valentine’s Day</h2>
-  <p>I always thought Valentine’s Day was cringe—until you came into my life. You taught me to love the things my past self never understood. And for you, deva, I’m happy to stay cringe for the rest of my life.<br><br> You’re an angel who gave me everything you had, without holding back. I promise I’ll always stand by you, especially during your toughest times. When I’m with you, every single day feels like Valentine’s Day. My words and letters aren’t just for one day—they’re for always.<br><br> You will forever be loved and valued in my eyes, pathhu kutyyy<br><br> Yours always and forever,<br>your Valentine</p>
+<div id="thankYou" class="hidden">
+    <h2>Awwiee thank you so muchhh!!!</h2>
+    <p>Take this my Valentines letters!!! &lt;3</p>
+    <button id="takeBtn">Take 💌</button>
 </div>
 
 <script>
-let current = 0;
-const letters = document.querySelectorAll('.letter');
-const nextBtn = document.getElementById('nextBtn');
-
-function showLetter(index) {
-    letters.forEach((l, i) => l.style.display = i === index ? 'block' : 'none');
-}
-
-nextBtn.addEventListener('click', () => {
-    if(current < letters.length) {
-        showLetter(current);
-        current++;
-        if(current === letters.length) nextBtn.style.display = 'none';
-    }
+// Step 1: Okay button
+const okayBtn = document.getElementById('okayBtn');
+const valentinePrompt = document.getElementById('valentinePrompt');
+okayBtn.addEventListener('click', () => {
+    okayBtn.style.display = 'none';
+    valentinePrompt.classList.remove('hidden');
 });
 
+// Step 2: No button jumps around
+const noBtn = document.getElementById('noBtn');
+noBtn.addEventListener('mouseenter', () => {
+    const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+    const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+    noBtn.style.position = 'absolute';
+    noBtn.style.left = x + 'px';
+    noBtn.style.top = y + 'px';
+});
+
+// Step 3: Yes button enlarges on hover
+const yesBtn = document.getElementById('yesBtn');
+yesBtn.addEventListener('mouseenter', () => {
+    yesBtn.style.transform = 'scale(1.3)';
+});
+yesBtn.addEventListener('mouseleave', () => {
+    yesBtn.style.transform = 'scale(1)';
+});
+
+// Step 4: Clicking Yes shows thank you and Take button
+const thankYou = document.getElementById('thankYou');
+yesBtn.addEventListener('click', () => {
+    valentinePrompt.classList.add('hidden');
+    thankYou.classList.remove('hidden');
+});
+
+// Step 5: Take button redirects to index2.html
+const takeBtn = document.getElementById('takeBtn');
+thankYou.addEventListener('click', () => {
+    takeBtn.style.display = 'inline-block';
+});
+takeBtn.addEventListener('click', () => {
+    window.location.href = 'index2.html';
+});
 </script>
 
 </body>
