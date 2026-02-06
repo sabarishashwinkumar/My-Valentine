@@ -5,12 +5,12 @@
   <title>For Patthu ❤️</title>
   <style>
     body {
-      height: 100vh;
       margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
       display: flex;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(135deg, #ff758c, #ff7eb3);
       font-family: Arial, sans-serif;
       overflow: hidden;
     }
@@ -21,10 +21,12 @@
       border-radius: 20px;
       text-align: center;
       box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+      z-index: 1;
     }
 
     h1 {
       color: #ff4d6d;
+      margin-bottom: 10px;
     }
 
     button {
@@ -34,6 +36,7 @@
       border: none;
       border-radius: 30px;
       cursor: pointer;
+      transition: transform 0.3s ease;
     }
 
     .yes {
@@ -53,25 +56,38 @@
     <h1>Hey Patthu 💕</h1>
     <h2>Will you be my Valentine? 🌹</h2>
     <button class="yes" onclick="yesClicked()">Yes 😍</button>
-    <button class="no" onmouseover="moveNo()">No 🙈</button>
+    <button class="no" onmouseover="noHovered()">No 🙈</button>
   </div>
 
   <script>
-    function yesClicked() {
-      document.body.innerHTML = `
-        <h1 style="color:white; font-size:42px; text-align:center;">
-          YAYYY Patthu!! 💖🥰<br>
-          I LOVE YOU FOREVER ❤️🌹
-        </h1>`;
-    }
+    let yesScale = 1;
 
-    function moveNo() {
+    function noHovered() {
       const noBtn = document.querySelector('.no');
+      const yesBtn = document.querySelector('.yes');
+
+      // Move NO button
       const x = Math.random() * (window.innerWidth - 120);
       const y = Math.random() * (window.innerHeight - 60);
-
       noBtn.style.left = x + 'px';
       noBtn.style.top = y + 'px';
+
+      // Grow YES button
+      yesScale += 0.1;
+      yesBtn.style.transform = `scale(${yesScale})`;
+    }
+
+    function yesClicked() {
+      document.body.innerHTML = `
+        <h1 style="
+          color:white;
+          font-size:42px;
+          text-align:center;
+        ">
+          YAYYY Patthu!! 💖🥰<br>
+          You’re my Valentine ❤️🌹
+        </h1>
+      `;
     }
   </script>
 
