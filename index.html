@@ -37,32 +37,68 @@ button {
 </head>
 <body>
 
-<h1>Awwiee your so beutifulllll....</h1>
+<h1 id="phaseText">Awwiee your so beutifulllll....</h1>
 <div id="gifContainer">
-    <img src="https://media.giphy.com/media/l0HlBO7eyXzSZkJri/giphy.gif" alt="Cute GIF" width="250">
+    <img id="phaseGif" src="" alt="Cute GIF" width="250">
 </div>
 
 <button id="okayBtn">Okay?</button>
 
 <div id="valentinePrompt" class="hidden">
     <h2>Will you be my Valentine?</h2>
+    <div id="phase2GifContainer">
+        <img id="phase2Gif" src="" alt="Valentine GIF" width="250">
+    </div>
     <button id="yesBtn">Yes</button>
     <button id="noBtn">No</button>
 </div>
 
 <div id="thankYou" class="hidden">
     <h2>Awwiee thank you so muchhh!!!</h2>
+    <div id="phase3GifContainer">
+        <img id="phase3Gif" src="" alt="Love GIF" width="250">
+    </div>
     <p>Take this my Valentines letters!!! &lt;3</p>
     <button id="takeBtn">Take 💌</button>
 </div>
 
 <script>
+// GIF lists
+const phase1Gifs = [
+    "/assets/phase1/gif1.gif",
+    "/assets/phase1/gif2.gif",
+    "/assets/phase1/gif3.gif"
+    // add all phase 1 GIFs here
+];
+const phase2Gifs = [
+    "/assets/phase2/gif1.gif",
+    "/assets/phase2/gif2.gif",
+    "/assets/phase2/gif3.gif"
+    // add all phase 2 GIFs here
+];
+const phase3Gifs = [
+    "/assets/phase3/gif1.gif",
+    "/assets/phase3/gif2.gif",
+    "/assets/phase3/gif3.gif"
+    // add all phase 3 GIFs here
+];
+
+// Random helper function
+function getRandomGif(array) {
+    return array[Math.floor(Math.random() * array.length)];
+}
+
+// Set initial GIFs
+document.getElementById('phaseGif').src = getRandomGif(phase1Gifs);
+
 // Step 1: Okay button
 const okayBtn = document.getElementById('okayBtn');
 const valentinePrompt = document.getElementById('valentinePrompt');
 okayBtn.addEventListener('click', () => {
     okayBtn.style.display = 'none';
     valentinePrompt.classList.remove('hidden');
+    // Random phase 2 GIF
+    document.getElementById('phase2Gif').src = getRandomGif(phase2Gifs);
 });
 
 // Step 2: No button jumps around
@@ -89,6 +125,8 @@ const thankYou = document.getElementById('thankYou');
 yesBtn.addEventListener('click', () => {
     valentinePrompt.classList.add('hidden');
     thankYou.classList.remove('hidden');
+    // Random phase 3 GIF
+    document.getElementById('phase3Gif').src = getRandomGif(phase3Gifs);
 });
 
 // Step 5: Take button redirects to index2.html
