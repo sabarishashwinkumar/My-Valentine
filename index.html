@@ -64,15 +64,15 @@ button {
 
 <script>
 // Number of GIFs in each phase
-const phase1Count = 5; // change to how many GIFs you have in /phase1/
-const phase2Count = 4; // change to how many GIFs you have in /phase2/
-const phase3Count = 6; // change to how many GIFs you have in /phase3/
+const phase1Count = 5; // number of pics in /phase1
+const phase2Count = 4; // number of pics in /phase2
+const phase3Count = 6; // number of pics in /phase3
 
-// Generate GIF arrays dynamically
+// Generate GIF array for pic (1), pic (2), etc.
 function generateGifArray(folder, count) {
     let arr = [];
     for (let i = 1; i <= count; i++) {
-        arr.push(`${folder}/pic${i}.gif`);
+        arr.push(`${folder}/pic%20(${i}).gif`); // encode the space
     }
     return arr;
 }
@@ -81,7 +81,7 @@ const phase1Gifs = generateGifArray("/assets/phase1", phase1Count);
 const phase2Gifs = generateGifArray("/assets/phase2", phase2Count);
 const phase3Gifs = generateGifArray("/assets/phase3", phase3Count);
 
-// Random helper function
+// Random helper
 function getRandomGif(array) {
     return array[Math.floor(Math.random() * array.length)];
 }
@@ -89,7 +89,7 @@ function getRandomGif(array) {
 // Set initial GIFs
 document.getElementById('phaseGif').src = getRandomGif(phase1Gifs);
 
-// Step 1: Okay button
+// Okay button → Phase 2
 const okayBtn = document.getElementById('okayBtn');
 const valentinePrompt = document.getElementById('valentinePrompt');
 okayBtn.addEventListener('click', () => {
@@ -98,7 +98,7 @@ okayBtn.addEventListener('click', () => {
     document.getElementById('phase2Gif').src = getRandomGif(phase2Gifs);
 });
 
-// Step 2: No button jumps
+// No button jumps
 const noBtn = document.getElementById('noBtn');
 noBtn.addEventListener('mouseenter', () => {
     const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
@@ -108,12 +108,12 @@ noBtn.addEventListener('mouseenter', () => {
     noBtn.style.top = y + 'px';
 });
 
-// Step 3: Yes button enlarges
+// Yes button enlarges
 const yesBtn = document.getElementById('yesBtn');
 yesBtn.addEventListener('mouseenter', () => yesBtn.style.transform = 'scale(1.3)');
 yesBtn.addEventListener('mouseleave', () => yesBtn.style.transform = 'scale(1)');
 
-// Step 4: Clicking Yes shows thank you
+// Clicking Yes → Phase 3
 const thankYou = document.getElementById('thankYou');
 yesBtn.addEventListener('click', () => {
     valentinePrompt.classList.add('hidden');
@@ -121,11 +121,12 @@ yesBtn.addEventListener('click', () => {
     document.getElementById('phase3Gif').src = getRandomGif(phase3Gifs);
 });
 
-// Step 5: Take button redirects
+// Take button redirects
 const takeBtn = document.getElementById('takeBtn');
 thankYou.addEventListener('click', () => takeBtn.style.display = 'inline-block');
 takeBtn.addEventListener('click', () => window.location.href = 'index2.html');
 </script>
+
 
 
 </body>
