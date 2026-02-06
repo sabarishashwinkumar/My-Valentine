@@ -5,100 +5,168 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>💖 Will You Be My Valentine? 💖</title>
 <style>
-body {
+html, body {
     margin: 0;
+    padding: 0;
+    height: 100%;
     font-family: 'Segoe UI', sans-serif;
-    background: #1a1a1a;
-    color: #fff;
+    overflow: hidden;
+    background: url('assets/background/pic.jpg') no-repeat center center fixed;
+    background-size: cover;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
     text-align: center;
+    color: #fff;
 }
-h1, p { margin: 20px; }
+
+.message-box {
+    background: rgba(0,0,0,0.6);
+    padding: 20px 40px;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 400px;
+    margin-top: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+    opacity: 1;
+    transition: opacity 0.6s ease;
+}
+
+h1, h2, p {
+    margin: 15px 0;
+    text-shadow: 1px 1px 5px #000;
+}
+
 button {
     padding: 12px 25px;
     font-size: 1.2em;
     border: none;
     border-radius: 12px;
     cursor: pointer;
-    margin: 15px;
+    margin: 10px;
     transition: all 0.2s ease;
 }
 #yesBtn { background: #ff4f8b; color: #fff; }
 #noBtn { background: #aaa; color: #000; position: relative; }
 #takeBtn { background: #ff9fc4; color: #fff; display: none; }
 
-#gifContainer { margin: 20px; }
+.phase-gifs {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    opacity: 1;
+    transition: opacity 0.6s ease;
+}
+.phase-gifs img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+}
 .hidden { display: none; }
 </style>
 </head>
 <body>
 
-<h1 id="phaseText">Awwiee your so beutifulllll....</h1>
-<div id="gifContainer">
-    <img id="phaseGif" src="" alt="Cute GIF" width="250">
+<!-- Phase 1 -->
+<div class="phase-gifs" id="phaseGifs"></div>
+<div class="message-box" id="phase1Box">
+    <h1>Awwiee you’re so beautiful Pathhu kuttyyy...🫠🥹🩷</h1>
+    <button id="okayBtn">Okay?</button>
 </div>
 
-<button id="okayBtn">Okay?</button>
-
-<div id="valentinePrompt" class="hidden">
-    <h2>Will you be my Valentine?</h2>
-    <div id="phase2GifContainer">
-        <img id="phase2Gif" src="" alt="Valentine GIF" width="250">
-    </div>
+<!-- Valentine Prompt -->
+<div class="phase-gifs hidden" id="phaseGifs2"></div>
+<div class="message-box hidden" id="valentinePrompt">
+    <h2>Will you be my Valentine??🥹❤️‍🔥🤌</h2>
     <button id="yesBtn">Yes</button>
     <button id="noBtn">No</button>
 </div>
 
-<div id="thankYou" class="hidden">
-    <h2>Awwiee thank you so muchhh!!!</h2>
-    <div id="phase3GifContainer">
-        <img id="phase3Gif" src="" alt="Love GIF" width="250">
-    </div>
-    <p>Take this my Valentines letters!!! &lt;3</p>
+<!-- Thank You -->
+<div class="phase-gifs hidden" id="phaseGifs3"></div>
+<div class="message-box hidden" id="thankYou">
+    <h2>Awwiee thank you so muchhh!!!😚😩</h2>
+    <p>Take this my Valentine's letters!!!😩🫴💌 &lt;3</p>
     <button id="takeBtn">Take 💌</button>
 </div>
 
 <script>
-// Number of GIFs in each phase
-const phase1Count = 5; // number of pics in /phase1
-const phase2Count = 4; // number of pics in /phase2
-const phase3Count = 6; // number of pics in /phase3
+// GIFs per phase
+const phase1Gifs = [
+    "assets/Phase 1/pic (1).gif",
+    "assets/Phase 1/pic (2).gif",
+    "assets/Phase 1/pic (3).gif"
+];
+const phase2Gifs = [
+    "assets/Phase 2/pic (1).gif",
+    "assets/Phase 2/pic (2).gif",
+    "assets/Phase 2/pic (3).gif"
+];
+const phase3Gifs = [
+    "assets/Phase 3/pic (1).gif",
+    "assets/Phase 3/pic (2).gif",
+    "assets/Phase 3/pic (3).gif"
+];
 
-// Generate GIF array for pic (1), pic (2), etc.
-function generateGifArray(folder, count) {
-    let arr = [];
-    for (let i = 1; i <= count; i++) {
-        arr.push(`${folder}/pic%20(${i}).gif`); // encode the space
-    }
-    return arr;
+// Function to fade out and fade in synchronously for message and GIF
+function transitionPhase(currentBox, nextBox, currentGifs, nextGifs) {
+    // Fade out current
+    currentBox.style.opacity = 0;
+    currentGifs.style.opacity = 0;
+
+    setTimeout(() => {
+        // Hide current
+        currentBox.classList.add('hidden');
+        currentGifs.classList.add('hidden');
+
+        // Show next
+        nextBox.classList.remove('hidden');
+        nextGifs.innerHTML = '';
+        nextGifs.classList.remove('hidden');
+
+        nextGifs.style.opacity = 0;
+        nextBox.style.opacity = 0;
+
+        // Add next GIFs
+        const gifsArray = nextGifs.id === 'phaseGifs2' ? phase2Gifs : phase3Gifs;
+        gifsArray.forEach(gif => {
+            const img = document.createElement('img');
+            img.src = gif;
+            nextGifs.appendChild(img);
+        });
+
+        // Fade in next
+        setTimeout(() => {
+            nextBox.style.opacity = 1;
+            nextGifs.style.opacity = 1;
+        }, 50);
+    }, 600); // match CSS transition time
 }
 
-const phase1Gifs = generateGifArray("/assets/phase1", phase1Count);
-const phase2Gifs = generateGifArray("/assets/phase2", phase2Count);
-const phase3Gifs = generateGifArray("/assets/phase3", phase3Count);
-
-// Random helper
-function getRandomGif(array) {
-    return array[Math.floor(Math.random() * array.length)];
-}
-
-// Set initial GIFs
-document.getElementById('phaseGif').src = getRandomGif(phase1Gifs);
+// Initial Phase 1
+const phaseGifs = document.getElementById('phaseGifs');
+phaseGifs.innerHTML = '';
+phase1Gifs.forEach(gif => {
+    const img = document.createElement('img');
+    img.src = gif;
+    phaseGifs.appendChild(img);
+});
 
 // Okay button → Phase 2
 const okayBtn = document.getElementById('okayBtn');
-const valentinePrompt = document.getElementById('valentinePrompt');
 okayBtn.addEventListener('click', () => {
-    okayBtn.style.display = 'none';
-    valentinePrompt.classList.remove('hidden');
-    document.getElementById('phase2Gif').src = getRandomGif(phase2Gifs);
+    transitionPhase(
+        document.getElementById('phase1Box'),
+        document.getElementById('valentinePrompt'),
+        document.getElementById('phaseGifs'),
+        document.getElementById('phaseGifs2')
+    );
 });
 
-// No button jumps
+// No button jump
 const noBtn = document.getElementById('noBtn');
 noBtn.addEventListener('mouseenter', () => {
     const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
@@ -108,26 +176,22 @@ noBtn.addEventListener('mouseenter', () => {
     noBtn.style.top = y + 'px';
 });
 
-// Yes button enlarges
+// Yes button → Phase 3
 const yesBtn = document.getElementById('yesBtn');
-yesBtn.addEventListener('mouseenter', () => yesBtn.style.transform = 'scale(1.3)');
-yesBtn.addEventListener('mouseleave', () => yesBtn.style.transform = 'scale(1)');
-
-// Clicking Yes → Phase 3
-const thankYou = document.getElementById('thankYou');
+const takeBtn = document.getElementById('takeBtn');
 yesBtn.addEventListener('click', () => {
-    valentinePrompt.classList.add('hidden');
-    thankYou.classList.remove('hidden');
-    document.getElementById('phase3Gif').src = getRandomGif(phase3Gifs);
+    transitionPhase(
+        document.getElementById('valentinePrompt'),
+        document.getElementById('thankYou'),
+        document.getElementById('phaseGifs2'),
+        document.getElementById('phaseGifs3')
+    );
+    takeBtn.style.display = 'inline-block';
 });
 
 // Take button redirects
-const takeBtn = document.getElementById('takeBtn');
-thankYou.addEventListener('click', () => takeBtn.style.display = 'inline-block');
 takeBtn.addEventListener('click', () => window.location.href = 'index2.html');
 </script>
-
-
 
 </body>
 </html>
